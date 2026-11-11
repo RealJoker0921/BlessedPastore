@@ -1,0 +1,294 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #5965e8;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 20px;
+}
+
+.container {
+    position: relative;
+    width: 850px;
+    max-width: 100%;
+    min-height: 420px;
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.28);
+}
+
+/* FORM CONTAINERS */
+
+.form-container {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    transition: transform 0.65s ease-in-out,
+                opacity 0.4s ease-in-out;
+}
+
+form {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 35px;
+    height: 100%;
+    text-align: center;
+}
+
+h1 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #080808;
+}
+
+form span {
+    font-size: 12px;
+    margin: 12px 0;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    height: 39px;
+    padding: 10px;
+    margin: 5px 0;
+    border: none;
+    outline: none;
+    background: #eee;
+    font-size: 12px;
+}
+
+input:focus {
+    box-shadow: 0 0 0 1px #6875e8;
+}
+
+form > a {
+    margin: 14px 0;
+    color: #444;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+button {
+    border: none;
+    border-radius: 22px;
+    padding: 12px 35px;
+    background: #6978df;
+    color: white;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+button:hover {
+    background: #4d5bd0;
+}
+
+button:active {
+    transform: scale(0.96);
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid #2639a8;
+    outline-offset: 3px;
+}
+
+/* SOCIAL ICONS */
+
+.social-container {
+    display: flex;
+    gap: 10px;
+    margin: 5px 0;
+}
+
+.social-container a {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #eee;
+    border-radius: 50%;
+    color: #333;
+    font-size: 13px;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.social-container a:hover {
+    background: #eee;
+}
+
+/* SIGN IN: VISIBLE INITIALLY */
+
+.sign-in-container {
+    left: 0;
+    z-index: 2;
+    opacity: 1;
+}
+
+/* SIGN UP: HIDDEN INITIALLY */
+
+.sign-up-container {
+    left: 0;
+    z-index: 1;
+    opacity: 0;
+}
+
+/* BLUE OVERLAY */
+
+.overlay-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 10;
+    transition: transform 0.65s ease-in-out;
+}
+
+.overlay {
+    position: relative;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    color: white;
+    background: linear-gradient(
+        120deg,
+        rgba(76, 100, 245, 0.96),
+        rgba(135, 151, 255, 0.94)
+    );
+    transition: transform 0.65s ease-in-out;
+}
+
+.overlay-panel {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.overlay-panel h2 {
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.overlay-panel p {
+    font-size: 12px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+    max-width: 280px;
+}
+
+.overlay-right {
+    right: 0;
+}
+
+.overlay-left {
+    left: 0;
+}
+
+button.ghost {
+    background: white;
+    color: #606dc9;
+    border: 1px solid white;
+    min-width: 140px;
+}
+
+button.ghost:hover {
+    background: transparent;
+    color: white;
+}
+
+/* ACTIVE STATE: SIGN UP */
+
+.container.right-panel-active .sign-in-container {
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.container.right-panel-active .sign-up-container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+}
+
+.container.right-panel-active .overlay-container {
+    transform: translateX(-100%);
+}
+
+.container.right-panel-active .overlay {
+    transform: translateX(50%);
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+    body {
+        padding: 15px;
+    }
+
+    .container {
+        min-height: 580px;
+    }
+
+    form {
+        padding: 18px;
+    }
+
+    h1 {
+        font-size: 23px;
+    }
+
+    .overlay-panel {
+        padding: 12px;
+    }
+
+    .overlay-panel h2 {
+        font-size: 19px;
+    }
+
+    .overlay-panel p {
+        font-size: 10px;
+    }
+
+    button.ghost {
+        min-width: 105px;
+        padding: 11px 15px;
+    }
+
+    .social-container {
+        gap: 5px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .form-container,
+    .overlay-container,
+    .overlay {
+        transition-duration: 0.01ms;
+    }
+}
