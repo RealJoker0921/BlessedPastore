@@ -1,5 +1,14 @@
 <?php
-include 'dbcon.php';
+session_start();
+
+if (!isset($_SESSION["user_id"], $_SESSION["user_name"])) {
+    header("Location: index.php");
+    exit;
+}
+
+require 'dbcon.php';
+
+$adminName = $_SESSION["user_name"];
 
 // Dashboard statistics
 $totalProducts = $pdo->query(
@@ -54,10 +63,12 @@ function clean($value) {
 
     <title>StockWise | Dashboard</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="sidebar.css">
 </head>
 <style>
-    * {
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -206,6 +217,27 @@ body {
     display: block;
     color: #8995a8;
     margin-top: 5px;
+}
+
+.admin form {
+    height: auto;
+    align-items: flex-start;
+    padding: 6px 0 0;
+    background: transparent;
+}
+
+.admin .logout-button {
+    padding: 0;
+    background: transparent;
+    color: #6478f5;
+    font-size: 11px;
+    letter-spacing: 0;
+}
+
+.admin .logout-button:hover {
+    background: transparent;
+    color: #243b83;
+    text-decoration: underline;
 }
 
 .avatar {
@@ -646,15 +678,18 @@ footer {
 
         <header class="topbar">
             <div>
-                <p class="eyebrow">INVENTORY WORKSPACE</p>
+                <p class="eyebrow">Blessed Pastore WORKSPACE</p>
                 <h1>Dashboard</h1>
             </div>
 
             <div class="admin">
                 <div class="avatar">AD</div>
                 <div>
-                    <strong>Administrator</strong>
-                    <small>Store Manager</small>
+                    <strong><?= clean($adminName) ?></strong>
+                    <small>Administrator</small>
+                    <form method="post" action="logout.php">
+                        <button class="logout-button" type="submit">Sign out</button>
+                    </form>
                 </div>
             </div>
         </header>
@@ -663,7 +698,7 @@ footer {
         <section class="welcome">
             <div>
                 <p>OVERVIEW</p>
-                <h2>Welcome back, Administrator!</h2>
+                <h2>Welcome back, <?= clean($adminName) ?>!</h2>
                 <span>
                     Here's what's happening with your store today.
                 </span>
@@ -978,5 +1013,6 @@ function exportTableCSV(tableId, filename) {
 
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

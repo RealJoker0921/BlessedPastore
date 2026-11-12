@@ -11,60 +11,18 @@ signInBtn.addEventListener("click", function () {
     container.classList.remove("right-panel-active");
 });
 
-// Demo form submissions only.
-// Connect these forms to a secure backend for real accounts.
+document.querySelectorAll(".toggle-password").forEach((button) => {
+    button.addEventListener("click", function () {
+        const targetId = this.dataset.target;
+        const passwordInput = document.getElementById(targetId);
 
-document.getElementById("signupForm").addEventListener("submit", async function (e) {
-    e.preventDefault();
+        if (!passwordInput) return;
 
-    try {
-        const response = await fetch("register.php", {
-            method: "POST",
-            body: new FormData(this)
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-            alert("Account created successfully! You can now sign in.");
-            this.reset();
-
-            document.getElementById("container")
-                .classList.remove("right-panel-active");
-        } else {
-            alert(result.message || "Registration failed.");
-        }
-    } catch (error) {
-        alert("Unable to connect to the server. Please try again.");
-        console.error(error);
-    }
-});
-
-document.getElementById("signinForm").addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    const formData = new FormData(this);
-
-    try {
-        const response = await fetch("login.php", {
-            method: "POST",
-            body: formData
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-            alert("Login successful!");
-
-            // Redirect after successful login.
-            window.location.href = "dashboard.php";
-        } else {
-            alert("Intruders! DONT COME IN!!!");
-        }
-    } catch (error) {
-        alert("Unable to connect to the server. Please try again.");
-        console.error(error);
-    }
+        const shouldShow = passwordInput.type === "password";
+        passwordInput.type = shouldShow ? "text" : "password";
+        this.textContent = shouldShow ? "Hide" : "Show";
+        this.setAttribute("aria-label", shouldShow ? "Hide password" : "Show password");
+    });
 });
 
 document.getElementById("forgotPassword").addEventListener("click", function (e) {

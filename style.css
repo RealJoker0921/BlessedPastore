@@ -59,6 +59,12 @@ form span {
     color: #333;
 }
 
+.form-message {
+    margin: -8px 0 8px;
+    color: #b42318;
+    font-size: 12px;
+}
+
 input {
     width: 100%;
     height: 39px;
@@ -188,6 +194,7 @@ a:focus-visible {
     justify-content: center;
     align-items: center;
     text-align: center;
+    transition: opacity 0.3s ease, transform 0.5s ease;
 }
 
 .overlay-panel h2 {
@@ -204,10 +211,14 @@ a:focus-visible {
 
 .overlay-right {
     right: 0;
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .overlay-left {
     left: 0;
+    opacity: 0;
+    transform: translateX(-18px);
 }
 
 button.ghost {
@@ -242,6 +253,17 @@ button.ghost:hover {
 
 .container.right-panel-active .overlay {
     transform: translateX(50%);
+}
+
+.container.right-panel-active .overlay-right {
+    opacity: 0;
+    transform: translateX(18px);
+}
+
+.container.right-panel-active .overlay-left {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.12s;
 }
 
 /* MOBILE */
@@ -288,7 +310,153 @@ button.ghost:hover {
 @media (prefers-reduced-motion: reduce) {
     .form-container,
     .overlay-container,
-    .overlay {
+    .overlay,
+    .overlay-panel {
         transition-duration: 0.01ms;
+        transition-delay: 0ms;
+    }
+}
+
+
+/* =========================================================
+   EXTRA ANIMATIONS
+   Keeps the existing sign-in/sign-up switching functionality.
+   ========================================================= */
+
+/* Animated page background */
+body {
+    background: linear-gradient(-45deg, #4d5bd0, #6978df, #8797ff, #5965e8);
+    background-size: 300% 300%;
+    animation: backgroundFlow 14s ease infinite;
+}
+
+/* Login card entrance and gentle floating motion */
+.container {
+    animation: cardEntrance 0.9s cubic-bezier(.2, .75, .25, 1) both,
+               cardFloat 6s ease-in-out 1s infinite;
+    transform-origin: center;
+    will-change: transform, opacity;
+}
+
+@keyframes backgroundFlow {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes cardEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(28px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes cardFloat {
+    0%, 100% { translate: 0 0; }
+    50%      { translate: 0 -6px; }
+}
+
+/* Form content softly appears */
+.form-container form > * {
+    animation: formItemIn 0.55s ease both;
+}
+
+.form-container form > *:nth-child(1) { animation-delay: 0.12s; }
+.form-container form > *:nth-child(2) { animation-delay: 0.18s; }
+.form-container form > *:nth-child(3) { animation-delay: 0.24s; }
+.form-container form > *:nth-child(4) { animation-delay: 0.30s; }
+.form-container form > *:nth-child(5) { animation-delay: 0.36s; }
+.form-container form > *:nth-child(6) { animation-delay: 0.42s; }
+
+@keyframes formItemIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Smooth input focus */
+input {
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: background 0.25s ease,
+                border-color 0.25s ease,
+                box-shadow 0.25s ease,
+                transform 0.25s ease;
+}
+
+input:hover {
+    background: #f3f3f8;
+}
+
+input:focus {
+    background: #fff;
+    border-color: #6978df;
+    box-shadow: 0 0 0 3px rgba(105, 120, 223, 0.16);
+    transform: translateY(-1px);
+}
+
+/* Buttons lift slightly on hover */
+button {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s ease,
+                background 0.25s ease,
+                box-shadow 0.25s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 16px rgba(62, 75, 180, 0.2);
+}
+
+button:active {
+    transform: translateY(0) scale(0.96);
+    box-shadow: none;
+}
+
+/* Soft moving shine across the blue overlay */
+.overlay {
+    background-size: 200% 200%;
+    animation: overlayGlow 9s ease-in-out infinite;
+}
+
+@keyframes overlayGlow {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+}
+
+/* Make the switch panels feel smoother */
+.overlay-panel h2,
+.overlay-panel p,
+.overlay-panel button {
+    transition: opacity 0.35s ease, transform 0.45s ease;
+}
+
+/* Respect visitors who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    body,
+    .container,
+    .form-container form > *,
+    .overlay {
+        animation: none !important;
+    }
+
+    .form-container,
+    .overlay-container,
+    .overlay,
+    .overlay-panel,
+    input,
+    button {
+        transition-duration: 0.01ms !important;
+        transition-delay: 0ms !important;
     }
 }

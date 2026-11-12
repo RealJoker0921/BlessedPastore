@@ -1,5 +1,14 @@
 <?php
-include "dbcon.php";
+session_start();
+
+if (!isset($_SESSION["user_id"], $_SESSION["user_name"])) {
+    header("Location: index.php");
+    exit;
+}
+
+require 'dbcon.php';
+
+$adminName = $_SESSION["user_name"];
 
 // Add or update product
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -112,6 +121,8 @@ function peso($amount) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="sidebar.css">
     
 </head>
 <style>
@@ -419,6 +430,88 @@ function peso($amount) {
         box-sizing: border-box;
         background: #f8fafc;
     }
+    .topbar {
+    min-height: 95px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e5eaf2;
+    margin-bottom: 25px;
+    }
+    .topbar h1 {
+        margin: 0 0 8px;
+        color: #0f172a;
+        font-size: 28px;
+    }
+
+    .admin {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-size: 12px;
+    }
+
+    .admin small {
+        display: block;
+        color: #8995a8;
+        margin-top: 5px;
+    }
+
+    .admin form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: auto;
+        align-items: flex-start;
+        padding: 6px 0 0;
+        background: transparent;
+        text-align: center;
+    }
+
+    .admin .logout-button {
+        padding: 0;
+        border: none;
+        border-radius: 22px;
+        background: transparent;
+        color: #6478f5;
+        font-size: 11px;
+        font-weight: bold;
+        letter-spacing: 0;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.25s ease,
+                    background 0.25s ease,
+                    box-shadow 0.25s ease;
+    }
+
+    .admin .logout-button:hover {
+        background: transparent;
+        color: #243b83;
+        text-decoration: underline;
+        transform: translateY(-2px);
+        box-shadow: 0 7px 16px rgba(62, 75, 180, 0.2);
+    }
+
+    .admin .logout-button:active {
+        transform: translateY(0) scale(0.96);
+        box-shadow: none;
+    }
+
+    .admin .logout-button:focus-visible {
+        outline: 2px solid #2639a8;
+        outline-offset: 3px;
+    }
+    .avatar {
+    width: 39px;
+    height: 39px;
+    border-radius: 50%;
+    background: #e0e7ff;
+    color: #3b4fc1;
+    display: grid;
+    place-items: center;
+    font-weight: bold;
+    }
 
     /* Responsive design */
     @media (max-width: 768px) {
@@ -480,14 +573,28 @@ function peso($amount) {
 </style>
 <body>
 
-<div class="sidebar">
-    <h2>ProductMS</h2>
-    <a href="dashboard.php">Dashboard</a>
-    <a href="product.php" class="active">Products</a>
-    <a href="suppliers.php">Suppliers</a>
-    <a href="sales.php">Sales</a>
-    <a href="reports.php">Reports</a>
-</div>
+<div class="layout">
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">S</div>
+            <div>
+                <h2>Blessed Pastore Sari-sari Store</h2>
+                <small>PRODUCT MANAGEMENT</small>
+            </div>
+        </div>
+        <p class="menu-title">WORKSPACE</p>
+        <nav class="navigation">
+            <a href="dashboard.php"><span>▦</span> Dashboard</a>
+            <a href="product.php" class="active"><span>□</span> Products</a>
+            <a href="suppliers.php"><span>♧</span> Suppliers</a>
+            <a href="sales.php"><span>↗</span> Sales</a>
+            <a href="reports.php"><span>▤</span> Sales Reports</a>
+        </nav>
+        <div class="sidebar-footer">
+            <span class="online-dot"></span>
+            <div><strong>System status</strong><small>Database connected</small></div>
+        </div>
+    </aside>
 
 <main class="main-content">
     <header class="topbar">
@@ -495,6 +602,17 @@ function peso($amount) {
             <h1>Product Management</h1>
             <p>Manage your store's products and inventory.</p>
         </div>
+
+        <div class="admin">
+                <div class="avatar">AD</div>
+                <div>
+                    <strong><?= clean($adminName) ?></strong>
+                    <small>Administrator</small>
+                    <form method="post" action="logout.php">
+                        <button class="logout-button" type="submit">Sign out</button>
+                    </form>
+                </div>
+            </div>
     </header>
 
     <?php if (isset($_GET["message"])): ?>
@@ -635,6 +753,8 @@ function peso($amount) {
         </div>
     </section>
 </main>
+</div>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

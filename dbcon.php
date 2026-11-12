@@ -2,7 +2,7 @@
 $hostname="localhost";
 $username="root";
 $password="";
-$dbname="SAD";
+$dbname="sad";
 
 try {
     $pdo = new PDO(
