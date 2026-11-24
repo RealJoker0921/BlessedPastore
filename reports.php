@@ -88,7 +88,7 @@ $dailySales = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reports | ProductMS</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="sidebar.css">
+    <link rel="stylesheet" href="sidebar.css?v=4">
 </head>
 <style>
     *{
@@ -937,7 +937,6 @@ $dailySales = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     .main-content {
-        margin-left: 250px;
         padding: 30px;
         min-height: 100vh;
         box-sizing: border-box;
@@ -961,7 +960,6 @@ $dailySales = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         .main-content {
-            margin-left: 200px;
             padding: 20px;
         }
     }
@@ -992,7 +990,6 @@ $dailySales = $stmt->fetchAll(PDO::FETCH_ASSOC);
         .sidebar a::before { font-size: 21px; }
 
         .main-content {
-            margin-left: 75px;
             padding: 15px;
         }
     }

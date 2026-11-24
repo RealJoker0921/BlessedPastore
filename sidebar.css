@@ -162,3 +162,35 @@
         padding: 0 14px;
     }
 }
+
+/* Shared dashboard sizing
+   Keep every management page aligned to the same sidebar and content width. */
+.layout {
+    width: 100% !important;
+}
+
+.layout > .sidebar {
+    width: 250px !important;
+    flex-basis: 250px !important;
+}
+
+.layout > .main-content {
+    flex: 1 1 auto !important;
+    width: calc(100% - 250px) !important;
+    max-width: none !important;
+    margin-left: 0 !important;
+    padding: 0 30px 30px !important;
+    box-sizing: border-box !important;
+}
+
+@media (max-width: 760px) {
+    .layout > .sidebar {
+        width: 100% !important;
+        flex-basis: 100% !important;
+    }
+
+    .layout > .main-content {
+        width: 100%;
+        padding: 0 14px 20px;
+    }
+}

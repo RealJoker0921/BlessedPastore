@@ -136,8 +136,7 @@ $sales = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sales Management | ProductMS</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="sidebar.css">
+    <link rel="stylesheet" href="sidebar.css?v=4">
     <script src="script.js" defer></script>
 </head>
 <style>
@@ -457,6 +456,12 @@ $sales = $stmt->fetchAll(PDO::FETCH_ASSOC);
         min-width: 0;
     }
 
+    .panel h2 {
+        margin: 0 0 20px;
+        color: #172554;
+        font-size: 20px;
+    }
+
     .panel + .panel {
         margin-top: 24px;
     }
@@ -735,6 +740,10 @@ $sales = $stmt->fetchAll(PDO::FETCH_ASSOC);
     grid-template-columns: 2fr 1fr ;
     column-gap: 25px;
     align-items: start ;
+    height: auto;
+    padding: 0;
+    background: transparent;
+    text-align: left;
 }
 
 .sale-form > .form-group {
@@ -818,6 +827,31 @@ $sales = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     .sale-form > button {
         justify-self: start;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        display: inline-block;
+        padding: 9px 13px;
+        border: none;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 13px;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background: #2563eb;
+        color: #fff;
+    }
+
+    .btn-primary:hover {
+        background: #1d4ed8;
+    }
+
+    .btn-secondary {
+        background: #e2e8f0;
+        color: #1e293b;
     }
 
     /* Report date filters */
@@ -979,7 +1013,6 @@ $sales = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     .main-content {
-        margin-left: 250px;
         padding: 30px;
         min-height: 100vh;
         box-sizing: border-box;
@@ -1003,7 +1036,6 @@ $sales = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         .main-content {
-            margin-left: 200px;
             padding: 20px;
         }
     }
@@ -1034,7 +1066,6 @@ $sales = $stmt->fetchAll(PDO::FETCH_ASSOC);
         .sidebar a::before { font-size: 21px; }
 
         .main-content {
-            margin-left: 75px;
             padding: 15px;
         }
     }
