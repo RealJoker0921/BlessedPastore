@@ -136,7 +136,7 @@ $sales = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sales Management | ProductMS</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="sidebar.css?v=4">
+    <link rel="stylesheet" href="sidebar.css?v=6">
     <script src="script.js" defer></script>
 </head>
 <style>
@@ -299,17 +299,22 @@ $sales = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     .admin .logout-button {
-        padding: 0;
-        background: transparent;
-        color: #6478f5;
-        font-size: 11px;
+        min-height: 32px;
+        padding: 7px 12px;
+        border: 1px solid #6478f5;
+        border-radius: 7px;
+        background: #6478f5;
+        color: #fff;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        font-weight: 700;
         letter-spacing: 0;
+        line-height: 1;
     }
 
     .admin .logout-button:hover {
-        background: transparent;
-        color: #243b83;
-        text-decoration: underline;
+        background: #4d5bd0;
+        color: #fff;
     }
 
     .avatar {

@@ -16,7 +16,7 @@ body {
 
 .container {
     position: relative;
-    width: 850px;
+    width: 420px;
     max-width: 100%;
     min-height: 420px;
     background: white;
@@ -30,10 +30,9 @@ body {
 .form-container {
     position: absolute;
     top: 0;
-    width: 50%;
+    width: 100%;
     height: 100%;
-    transition: transform 0.65s ease-in-out,
-                opacity 0.4s ease-in-out;
+    transition: opacity 0.4s ease-in-out;
 }
 
 form {
@@ -140,130 +139,10 @@ a:focus-visible {
     background: #eee;
 }
 
-/* SIGN IN: VISIBLE INITIALLY */
-
 .sign-in-container {
     left: 0;
     z-index: 2;
     opacity: 1;
-}
-
-/* SIGN UP: HIDDEN INITIALLY */
-
-.sign-up-container {
-    left: 0;
-    z-index: 1;
-    opacity: 0;
-}
-
-/* BLUE OVERLAY */
-
-.overlay-container {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 50%;
-    height: 100%;
-    overflow: hidden;
-    z-index: 10;
-    transition: transform 0.65s ease-in-out;
-}
-
-.overlay {
-    position: relative;
-    left: -100%;
-    width: 200%;
-    height: 100%;
-    color: white;
-    background: linear-gradient(
-        120deg,
-        rgba(76, 100, 245, 0.96),
-        rgba(135, 151, 255, 0.94)
-    );
-    transition: transform 0.65s ease-in-out;
-}
-
-.overlay-panel {
-    position: absolute;
-    top: 0;
-    width: 50%;
-    height: 100%;
-    padding: 35px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    transition: opacity 0.3s ease, transform 0.5s ease;
-}
-
-.overlay-panel h2 {
-    font-size: 25px;
-    margin-bottom: 15px;
-}
-
-.overlay-panel p {
-    font-size: 12px;
-    line-height: 1.7;
-    margin-bottom: 25px;
-    max-width: 280px;
-}
-
-.overlay-right {
-    right: 0;
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.overlay-left {
-    left: 0;
-    opacity: 0;
-    transform: translateX(-18px);
-}
-
-button.ghost {
-    background: white;
-    color: #606dc9;
-    border: 1px solid white;
-    min-width: 140px;
-}
-
-button.ghost:hover {
-    background: transparent;
-    color: white;
-}
-
-/* ACTIVE STATE: SIGN UP */
-
-.container.right-panel-active .sign-in-container {
-    transform: translateX(100%);
-    opacity: 0;
-    pointer-events: none;
-}
-
-.container.right-panel-active .sign-up-container {
-    transform: translateX(100%);
-    opacity: 1;
-    z-index: 5;
-}
-
-.container.right-panel-active .overlay-container {
-    transform: translateX(-100%);
-}
-
-.container.right-panel-active .overlay {
-    transform: translateX(50%);
-}
-
-.container.right-panel-active .overlay-right {
-    opacity: 0;
-    transform: translateX(18px);
-}
-
-.container.right-panel-active .overlay-left {
-    opacity: 1;
-    transform: translateX(0);
-    transition-delay: 0.12s;
 }
 
 /* MOBILE */
@@ -317,11 +196,6 @@ button.ghost:hover {
     }
 }
 
-
-/* =========================================================
-   EXTRA ANIMATIONS
-   Keeps the existing sign-in/sign-up switching functionality.
-   ========================================================= */
 
 /* Animated page background */
 body {

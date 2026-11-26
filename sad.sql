@@ -18,14 +18,6 @@ CREATE TABLE `products` (
 
 
 
-INSERT INTO `products` (`id`, `sku`, `name`, `category`, `price`, `stock`, `low_stock_threshold`, `supplier_id`, `created_at`) VALUES
-(1, 'SKU-1001', 'Wireless Mouse', 'Accessories', 450.00, 25, 5, 1, '2026-10-27 23:48:40'),
-(2, 'SKU-1002', 'USB Keyboard', 'Accessories', 650.00, 12, 4, 1, '2026-10-27 23:48:40'),
-(3, 'SKU-1003', 'USB-C Cable', 'Cables', 180.00, 15, 5, 1, '2026-10-27 23:48:40'),
-(4, 'SKU-1004', 'Wired Mouse', 'Accessories', 300.00, 15, 5, NULL, '2026-10-28 00:29:43');
-
-
-
 CREATE TABLE `sales` (
   `id` int(11) NOT NULL,
   `product_id` int(11) DEFAULT NULL,
@@ -80,7 +72,7 @@ ALTER TABLE `users`
 
 
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 
 ALTER TABLE `sales`
@@ -94,4 +86,3 @@ ALTER TABLE `suppliers`
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
-
